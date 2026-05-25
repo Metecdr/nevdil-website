@@ -5,6 +5,7 @@ import { checkRateLimit } from "@/lib/rate-limit";
 import { filterContent } from "@/lib/profanity";
 import { sendRegistrationEmail } from "@/lib/mailer";
 import { sanitizeFormData } from "@/lib/sanitize";
+import { saveRegistration } from "@/lib/storage";
 
 export type FormState = {
   success: boolean;
@@ -87,7 +88,10 @@ export async function submitOnKayit(
     ip,
   });
 
-  // 7. E-posta bildirimi (hata olursa form yine de başarılı döner)
+  // 7. Dosyaya kaydet
+  saveRegistration({ name, phone, program, ageGroup, email, message, ip });
+
+  // 8. E-posta bildirimi (hata olursa form yine de başarılı döner)
   try {
     await sendRegistrationEmail({ name, phone, program, ageGroup, email, message });
   } catch (err) {
