@@ -62,7 +62,7 @@ export default function OnKayitPage() {
         </div>
 
         {/* Form kartı */}
-        <div className="bg-gray-950 border border-yellow-400/20 rounded-2xl p-7 animate-fade-in-up delay-200">
+        <div className="bg-gray-950 border border-yellow-400/20 rounded-2xl p-5 md:p-7 animate-fade-in-up delay-200">
           <OnKayitForm />
         </div>
 

@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-yellow-400/20 py-12">
+    <footer className="bg-black border-t border-yellow-400/20 py-10 md:py-12">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {/* Logo & Desc */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -56,8 +56,8 @@ export default function Footer() {
             <h4 className="text-yellow-400 font-bold mb-4 text-xs uppercase tracking-widest">
               İletişim
             </h4>
-            <ul className="space-y-2 text-gray-500 text-sm">
-              <li>📍 15 Temmuz Mah. 154. Sok. No:6B, 2000 Evler, Merkez/Nevşehir</li>
+            <ul className="space-y-3 text-gray-500 text-sm">
+              <li className="leading-relaxed">📍 15 Temmuz Mah. 154. Sok. No:6B,<br className="hidden sm:block" /> 2000 Evler, Merkez/Nevşehir</li>
               <li>📞 0537 428 76 40</li>
               <li>🕐 Hft içi 09:00 – 20:00</li>
             </ul>

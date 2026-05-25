@@ -25,27 +25,27 @@ export default function IletisimPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-black pt-24 pb-14">
+      <section className="bg-black pt-20 pb-10 md:pt-24 md:pb-14">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">
             Bize Ulaşın
           </span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-3 mb-4">
+          <h1 className="text-4xl md:text-6xl font-black text-white mt-3 mb-4">
             İletişim
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-base md:text-lg">
             Sormak istedikleriniz için arayın ya da WhatsApp&apos;tan yazın.
             Ön kayıt için aşağıdaki butonu kullanın.
           </p>
         </div>
       </section>
 
-      <section className="bg-black pb-24">
+      <section className="bg-black pb-16 md:pb-24">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
             {/* İletişim Bilgileri */}
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl p-8">
+            <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6 md:p-8">
               <h3 className="text-yellow-400 font-bold mb-6 text-xs uppercase tracking-widest">
                 İletişim Bilgileri
               </h3>
@@ -66,7 +66,7 @@ export default function IletisimPage() {
 
             {/* WhatsApp + Ön Kayıt */}
             <div className="flex flex-col gap-5">
-              <div className="bg-yellow-400 rounded-2xl p-7">
+              <div className="bg-yellow-400 rounded-2xl p-6 md:p-7">
                 <h3 className="text-black font-black text-xl mb-2">
                   WhatsApp ile Yazın
                 </h3>
@@ -86,7 +86,7 @@ export default function IletisimPage() {
                 </a>
               </div>
 
-              <div className="bg-gray-950 border border-yellow-400/20 rounded-2xl p-7 flex flex-col items-center text-center">
+              <div className="bg-gray-950 border border-yellow-400/20 rounded-2xl p-6 md:p-7 flex flex-col items-center text-center">
                 <div className="text-4xl mb-3">📋</div>
                 <h3 className="text-white font-bold text-lg mb-2">Ön Kayıt Formu</h3>
                 <p className="text-gray-500 text-sm mb-5 leading-relaxed">

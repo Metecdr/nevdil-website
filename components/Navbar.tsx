@@ -59,7 +59,7 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white p-1"
+          className="md:hidden text-white p-2 -mr-1 rounded-lg hover:bg-white/10 transition-colors"
           aria-label="Menü"
         >
           {open ? (
@@ -76,26 +76,30 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-black border-t border-yellow-400/20 px-4 py-5 flex flex-col gap-4">
+        <div className="md:hidden bg-black border-t border-yellow-400/20 px-4 py-4 flex flex-col gap-1">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className={`text-sm font-medium transition-colors ${
-                pathname === l.href ? "text-yellow-400" : "text-gray-400"
+              className={`text-base font-medium py-3 px-2 rounded-lg transition-colors ${
+                pathname === l.href
+                  ? "text-yellow-400"
+                  : "text-gray-300 hover:text-white hover:bg-white/5"
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/on-kayit"
-            onClick={() => setOpen(false)}
-            className="bg-yellow-400 text-black px-5 py-3 rounded-full text-sm font-bold text-center hover:bg-yellow-300 transition-colors"
-          >
-            Ön Kayıt Yaptır
-          </Link>
+          <div className="pt-2 pb-1">
+            <Link
+              href="/on-kayit"
+              onClick={() => setOpen(false)}
+              className="bg-yellow-400 text-black px-5 py-3.5 rounded-full text-sm font-bold text-center block hover:bg-yellow-300 transition-colors"
+            >
+              Ön Kayıt Yaptır →
+            </Link>
+          </div>
         </div>
       )}
     </nav>

@@ -50,15 +50,15 @@ export default function HakkimizdaPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-black pt-24 pb-16">
+      <section className="bg-black pt-20 pb-12 md:pt-24 md:pb-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">
             Hikayemiz
           </span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-3 mb-6">
+          <h1 className="text-4xl md:text-6xl font-black text-white mt-3 mb-5 md:mb-6">
             Hakkımızda
           </h1>
-          <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
             Nev-Dil, Nevşehir&apos;de 10 yılı aşkın süredir kaliteli dil eğitimi
             sunmaktadır. Küçük grup sınıfları ve bireysel yaklaşımımızla yüzlerce
             öğrencimizin hedeflerine ulaşmasına yardımcı olduk.
@@ -67,9 +67,9 @@ export default function HakkimizdaPage() {
       </section>
 
       {/* Değerler */}
-      <section className="bg-gray-950 py-20">
+      <section className="bg-gray-950 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10 md:mb-12">
             <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">
               Yaklaşımımız
             </span>
@@ -77,11 +77,11 @@ export default function HakkimizdaPage() {
               Neden Nev-Dil?
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {values.map((v) => (
               <div
                 key={v.title}
-                className="bg-black border border-yellow-400/20 rounded-2xl p-8 text-center hover:border-yellow-400/50 transition-all"
+                className="bg-black border border-yellow-400/20 rounded-2xl p-6 md:p-8 text-center hover:border-yellow-400/50 transition-all"
               >
                 <div className="text-5xl mb-5">{v.icon}</div>
                 <h3 className="text-yellow-400 font-bold text-xl mb-3">{v.title}</h3>
@@ -93,9 +93,9 @@ export default function HakkimizdaPage() {
       </section>
 
       {/* Öğretmenler */}
-      <section className="bg-black py-20">
+      <section className="bg-black py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10 md:mb-12">
             <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">
               Ekibimiz
             </span>
@@ -103,11 +103,11 @@ export default function HakkimizdaPage() {
               Öğretmenlerimiz
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {teachers.map((t, i) => (
               <div
                 key={i}
-                className="bg-gray-950 border border-gray-800 rounded-2xl p-8 text-center hover:border-yellow-400/40 transition-all"
+                className="bg-gray-950 border border-gray-800 rounded-2xl p-6 md:p-8 text-center hover:border-yellow-400/40 transition-all"
               >
                 {/* Fotoğraf placeholder */}
                 <div className="w-28 h-28 bg-yellow-400/10 border-2 border-yellow-400/30 rounded-full flex items-center justify-center mx-auto mb-5 text-5xl">

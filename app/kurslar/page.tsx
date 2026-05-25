@@ -70,15 +70,15 @@ export default function KurslarPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-black pt-24 pb-14">
+      <section className="bg-black pt-20 pb-10 md:pt-24 md:pb-14">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">
             Eğitim Programları
           </span>
-          <h1 className="text-5xl md:text-6xl font-black text-white mt-3 mb-4">
+          <h1 className="text-4xl md:text-6xl font-black text-white mt-3 mb-4">
             Kurslarımız
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
             İlkokuldan yetişkine, sınav hazırlıktan iş İngilizcesine — her ihtiyaca
             uygun programımız var.
           </p>
@@ -86,13 +86,13 @@ export default function KurslarPage() {
       </section>
 
       {/* Kurslar Grid */}
-      <section className="bg-black pb-24">
+      <section className="bg-black pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {courses.map((c) => (
               <div
                 key={c.level}
-                className={`relative bg-gray-950 rounded-2xl p-8 transition-all hover:-translate-y-1 ${
+                className={`relative bg-gray-950 rounded-2xl p-6 md:p-8 transition-all hover:-translate-y-1 ${
                   c.popular
                     ? "border-2 border-yellow-400"
                     : "border border-gray-800 hover:border-yellow-400/50"
@@ -138,12 +138,12 @@ export default function KurslarPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-yellow-400 py-16">
+      <section className="bg-yellow-400 py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-black text-black mb-3">
+          <h2 className="text-2xl md:text-3xl font-black text-black mb-3">
             Hangi Programa Uyduğunuzu Bilmiyor musunuz?
           </h2>
-          <p className="text-black/60 mb-8">
+          <p className="text-black/60 text-sm md:text-base mb-7 md:mb-8">
             Bize ulaşın, seviye belirleme sınavıyla sizi doğru programa yerleştirelim.
           </p>
           <Link
