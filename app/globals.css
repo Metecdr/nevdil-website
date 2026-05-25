@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #EAB308; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #ca9a04; }
+
+/* ── Keyframes ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.06; }
+  50%       { opacity: 0.14; }
+}
+
+/* ── Utility classes ── */
+@utility animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+@utility animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+@utility animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@utility animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+@utility delay-100 { animation-delay: 0.1s; }
+@utility delay-200 { animation-delay: 0.2s; }
+@utility delay-300 { animation-delay: 0.3s; }
+@utility delay-400 { animation-delay: 0.4s; }
+
+/* ── Base ── */
+* { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, sans-serif;
 }
