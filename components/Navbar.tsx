@@ -7,6 +7,7 @@ const links = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/kurslar", label: "Kurslar" },
+  { href: "/cocuk-gruplari", label: "Çocuk Grupları" },
   { href: "/iletisim", label: "İletişim" },
 ];
 

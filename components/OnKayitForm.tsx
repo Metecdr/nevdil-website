@@ -88,11 +88,15 @@ export default function OnKayitForm() {
             <option value="Yaz Kursu (Haziran–Ağustos)">Yaz Kursu (Haziran–Ağustos)</option>
             <option value="Güz Dönemi Kaydı">Güz Dönemi Kaydı</option>
           </optgroup>
-          <optgroup label="Program">
+          <optgroup label="Yetişkin & Sınav Hazırlık">
             <option value="YDS Hazırlık Grubu">YDS Hazırlık Grubu</option>
             <option value="İş İngilizcesi">İş İngilizcesi</option>
-            <option value="Junior Grubu (Ortaokul & Lise)">Junior Grubu (Ortaokul &amp; Lise)</option>
-            <option value="İlkokul Grubu">İlkokul Grubu</option>
+          </optgroup>
+          <optgroup label="Çocuk & Gençlik Grupları">
+            <option value="Junior Grubu (4–6 Yaş)">Junior Grubu (4–6 Yaş)</option>
+            <option value="İlkokul Grubu (1–4. Sınıf)">İlkokul Grubu (1–4. Sınıf)</option>
+            <option value="Ortaokul Grubu (5–7. Sınıf)">Ortaokul Grubu (5–7. Sınıf)</option>
+            <option value="Lise Grubu (9–12. Sınıf)">Lise Grubu (9–12. Sınıf)</option>
           </optgroup>
           <option value="Henüz bilmiyorum">Henüz bilmiyorum</option>
         </select>
