@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { filterContent } from "@/lib/profanity";
 import { sendRegistrationEmail } from "@/lib/mailer";
+import { sanitizeFormData } from "@/lib/sanitize";
 
 export type FormState = {
   success: boolean;
@@ -42,14 +43,17 @@ export async function submitOnKayit(
     };
   }
 
-  // 3. Alanları al
-  const name = formData.get("name")?.toString().trim() ?? "";
-  const phone = formData.get("phone")?.toString().trim() ?? "";
-  const program = formData.get("program")?.toString() ?? "Belirtilmedi";
-  const ageGroup = formData.get("ageGroup")?.toString() ?? "";
-  const email = formData.get("email")?.toString().trim() ?? "";
-  const message = formData.get("message")?.toString().trim() ?? "";
+  // 3. Alanları al ve sanitize et
   const kvkk = formData.get("kvkk")?.toString();
+  const raw = {
+    name: formData.get("name")?.toString() ?? "",
+    phone: formData.get("phone")?.toString() ?? "",
+    program: formData.get("program")?.toString() ?? "Belirtilmedi",
+    ageGroup: formData.get("ageGroup")?.toString() ?? "",
+    email: formData.get("email")?.toString() ?? "",
+    message: formData.get("message")?.toString() ?? "",
+  };
+  const { name, phone, program, ageGroup, email, message } = sanitizeFormData(raw);
 
   // 4. Temel doğrulama
   if (!name || name.length < 2) {
@@ -114,11 +118,14 @@ export async function submitForm(
     };
   }
 
-  const name = formData.get("name")?.toString().trim() ?? "";
-  const phone = formData.get("phone")?.toString().trim() ?? "";
-  const email = formData.get("email")?.toString().trim() ?? "";
-  const program = formData.get("program")?.toString() ?? "Belirtilmedi";
-  const message = formData.get("message")?.toString().trim() ?? "";
+  const { name, phone, email, program, message } = sanitizeFormData({
+    name: formData.get("name")?.toString() ?? "",
+    phone: formData.get("phone")?.toString() ?? "",
+    email: formData.get("email")?.toString() ?? "",
+    program: formData.get("program")?.toString() ?? "Belirtilmedi",
+    ageGroup: formData.get("ageGroup")?.toString() ?? "",
+    message: formData.get("message")?.toString() ?? "",
+  });
 
   if (!name || name.length < 2) {
     return { success: false, message: "Lütfen geçerli bir ad soyad girin." };

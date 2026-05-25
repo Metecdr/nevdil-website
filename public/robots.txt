@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /hakkimizda
+Allow: /kurslar
+Allow: /iletisim
+
+# Form sayfası indekslenmez — bot trafiği engellenir
+Disallow: /on-kayit
+
+# API ve sistem yolları
+Disallow: /api/
+Disallow: /_next/
