@@ -143,17 +143,40 @@ export default function OnKayitForm() {
         />
       </div>
 
+      {/* Honeypot — botlar için gizli alan, insanlar görmez */}
+      <input
+        name="website"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ display: "none" }}
+      />
+
+      {/* KVKK Onayı */}
+      <div className="flex items-start gap-3 pt-1">
+        <input
+          id="kvkk"
+          name="kvkk"
+          type="checkbox"
+          required
+          value="1"
+          className="mt-0.5 w-4 h-4 accent-yellow-400 flex-shrink-0 cursor-pointer"
+        />
+        <label htmlFor="kvkk" className="text-gray-500 text-xs leading-relaxed cursor-pointer">
+          <span className="text-gray-300">Kişisel verilerimin</span>{" "}
+          6698 sayılı KVKK kapsamında yalnızca kayıt ve iletişim
+          amacıyla işlenmesini kabul ediyorum.
+        </label>
+      </div>
+
       <button
         type="submit"
         disabled={isPending}
-        className="w-full bg-yellow-400 text-black font-bold py-4 rounded-full hover:bg-yellow-300 transition-all hover:scale-[1.02] text-base disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 mt-2"
+        className="w-full bg-yellow-400 text-black font-bold py-4 rounded-full hover:bg-yellow-300 transition-all hover:scale-[1.02] text-base disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 mt-1"
       >
         {isPending ? "Gönderiliyor..." : "Ön Kayıt Yaptır →"}
       </button>
-
-      <p className="text-center text-gray-600 text-xs pt-1">
-        Bilgileriniz yalnızca kayıt amacıyla kullanılır. Üçüncü taraflarla paylaşılmaz.
-      </p>
     </form>
   );
 }
