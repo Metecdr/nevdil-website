@@ -32,26 +32,6 @@ const values = [
   },
 ];
 
-const certs = [
-  {
-    icon: "🏛️",
-    title: "BEDAF Yetkili Kurum",
-    subtitle: "Authorized Institution",
-    desc: "Nev-Dil, BEDAF (British Educational Affairs) tarafından yetkili kurum olarak tanınmıştır. Öğrencilerin dil seviyelerini CEFR'e göre belirleme ve Avrupa Dil Portfolyosu (ELP) sertifikası verme yetkisine sahiptir.",
-    detail: "Sertifika No: 2025/000934 · Geçerlilik: 31 Aralık 2026",
-    badge: "Yetkili Kurum",
-    link: "https://www.bedaf.org.uk",
-  },
-  {
-    icon: "🎓",
-    title: "Yetkili Sınav Gözetmeni",
-    subtitle: "Authorized Examiner",
-    desc: "Kurucumuz Şerifegül Yavuz, BEDAF tarafından Yetkili Sınav Gözetmeni sertifikasını almıştır. Avrupa Konseyi'ne kayıtlı bu yetki ile öğrencilere uluslararası geçerli sertifikalar verilebilmektedir.",
-    detail: "Sertifika No: 2025/000926 · Geçerlilik: 31 Aralık 2026",
-    badge: "Yetkili Sınav Gözetmeni",
-    link: "https://www.bedaf.org.uk",
-  },
-];
 
 export default function HakkimizdaPage() {
   return (
@@ -125,57 +105,137 @@ export default function HakkimizdaPage() {
               Akreditasyon & Belgeler
             </h2>
             <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">
-              Nev-Dil, uluslararası alanda tanınan BEDAF — British Educational Affairs tarafından
-              yetkilendirilmiş bir kurumdur. Öğrencilerimize Avrupa Konseyi onaylı sertifika sağlıyoruz.
+              Nev-Dil, BEDAF — British Educational Affairs tarafından yetkilendirilmiş bir kurumdur.
+              Öğrencilerimize Avrupa Konseyi onaylı sertifika sağlıyoruz.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
-            {certs.map((c) => (
-              <div
-                key={c.title}
-                className="bg-gray-950 border border-yellow-400/25 rounded-2xl p-6 md:p-8 hover:border-yellow-400/50 transition-all"
-              >
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div className="text-4xl">{c.icon}</div>
-                  <span className="bg-yellow-400 text-black text-xs font-black px-3 py-1 rounded-full whitespace-nowrap">
-                    {c.badge}
-                  </span>
-                </div>
-                <h3 className="text-white font-black text-xl mb-1">{c.title}</h3>
-                <p className="text-yellow-400 text-xs font-semibold mb-4">{c.subtitle}</p>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">{c.desc}</p>
-                <p className="text-gray-600 text-xs">{c.detail}</p>
-              </div>
-            ))}
-          </div>
+          {/* Ana iki sertifika — PDF önizlemeli */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
 
-          {/* ELP Sertifika Bilgi Kutusu */}
-          <div className="bg-yellow-400/5 border border-yellow-400/30 rounded-2xl p-6 md:p-8">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="text-5xl">🏅</div>
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-white font-black text-xl mb-2">
-                  Öğrencilerimize Avrupa Dil Sertifikası
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  BEDAF yetkili kurum statümüz sayesinde öğrencilerimiz, dil seviyelerini
-                  belgeleyen <span className="text-yellow-400 font-semibold">Avrupa Dil Portfolyosu (ELP)</span> ve
-                  uluslararası geçerliliğe sahip dil sertifikaları alabilmektedir.
-                  Bu sertifikalar <span className="text-yellow-400 font-semibold">Avrupa Konseyi</span> tarafından
-                  tanınan CEFR standartlarına (A1–C2) dayanmaktadır.
-                </p>
+            {/* Yetkili Kurum */}
+            <div className="bg-gray-950 border border-yellow-400/25 rounded-2xl overflow-hidden hover:border-yellow-400/60 transition-all group">
+              {/* PDF Önizleme */}
+              <div className="relative bg-gray-900 h-56 md:h-64 overflow-hidden">
+                <iframe
+                  src="/belgeler/yetkili-kurum.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                  className="w-full h-full border-0 pointer-events-none"
+                  title="BEDAF Yetkili Kurum Belgesi"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
               </div>
-              <div className="flex-shrink-0">
+              {/* Bilgi */}
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bg-yellow-400 text-black text-xs font-black px-3 py-1 rounded-full">
+                    Yetkili Kurum
+                  </span>
+                  <span className="text-gray-600 text-xs">Geçerlilik: 31.12.2026</span>
+                </div>
+                <h3 className="text-white font-black text-lg mb-1">BEDAF Authorized Institution</h3>
+                <p className="text-gray-500 text-xs mb-4">
+                  Sertifika No: 2025/000934 · BEDAF British Educational Affairs
+                </p>
                 <a
-                  href="https://www.bedaf.org.uk"
+                  href="/belgeler/yetkili-kurum.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block border border-yellow-400/50 text-yellow-400 font-bold px-6 py-3 rounded-full text-sm hover:bg-yellow-400/10 transition-all"
+                  className="flex items-center gap-2 text-yellow-400 text-sm font-bold hover:underline"
                 >
-                  bedaf.org.uk →
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Belgeyi Görüntüle
                 </a>
               </div>
+            </div>
+
+            {/* Yetkili Sınav Gözetmeni */}
+            <div className="bg-gray-950 border border-yellow-400/25 rounded-2xl overflow-hidden hover:border-yellow-400/60 transition-all group">
+              <div className="relative bg-gray-900 h-56 md:h-64 overflow-hidden">
+                <iframe
+                  src="/belgeler/yetkili-sinav-gozetmeni.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                  className="w-full h-full border-0 pointer-events-none"
+                  title="BEDAF Yetkili Sınav Gözetmeni Belgesi"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
+              </div>
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="bg-yellow-400 text-black text-xs font-black px-3 py-1 rounded-full">
+                    Yetkili Sınav Gözetmeni
+                  </span>
+                  <span className="text-gray-600 text-xs">Geçerlilik: 31.12.2026</span>
+                </div>
+                <h3 className="text-white font-black text-lg mb-1">BEDAF Authorized Examiner</h3>
+                <p className="text-gray-500 text-xs mb-4">
+                  Sertifika No: 2025/000926 · Ms. Şerifegül Yavuz
+                </p>
+                <a
+                  href="/belgeler/yetkili-sinav-gozetmeni.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-yellow-400 text-sm font-bold hover:underline"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Belgeyi Görüntüle
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Garanti Belgesi + ELP Kutusu yan yana */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+            {/* Garanti Belgesi */}
+            <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6 hover:border-yellow-400/30 transition-all flex flex-col justify-between">
+              <div>
+                <div className="text-3xl mb-4">📄</div>
+                <h3 className="text-white font-black text-lg mb-2">Garanti Belgesi</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Kurumumuza ait resmi garanti belgesi. Eğitim kalitemizi ve
+                  taahhütlerimizi belgeleyen resmi doküman.
+                </p>
+              </div>
+              <a
+                href="/belgeler/garanti-belgesi.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 flex items-center gap-2 text-yellow-400 text-sm font-bold hover:underline"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Belgeyi Görüntüle
+              </a>
+            </div>
+
+            {/* ELP Sertifika Bilgi Kutusu */}
+            <div className="bg-yellow-400/5 border border-yellow-400/30 rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div className="text-3xl mb-4">🏅</div>
+                <h3 className="text-white font-black text-lg mb-2">
+                  Öğrencilere Avrupa Dil Sertifikası
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Öğrencilerimiz dil seviyelerini belgeleyen{" "}
+                  <span className="text-yellow-400 font-semibold">Avrupa Dil Portfolyosu (ELP)</span> ve
+                  uluslararası geçerliliğe sahip sertifikalar alabilmektedir.
+                  Tüm sertifikalar{" "}
+                  <span className="text-yellow-400 font-semibold">Avrupa Konseyi</span> onaylı
+                  CEFR standartlarına (A1–C2) dayanmaktadır.
+                </p>
+              </div>
+              <a
+                href="https://www.bedaf.org.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 border border-yellow-400/50 text-yellow-400 font-bold px-5 py-2.5 rounded-full text-sm hover:bg-yellow-400/10 transition-all w-fit"
+              >
+                bedaf.org.uk →
+              </a>
             </div>
           </div>
         </div>
