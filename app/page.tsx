@@ -39,10 +39,10 @@ const courses = [
 ];
 
 const stats = [
-  { n: "500+", l: "Mezun Öğrenci" },
-  { n: "10+", l: "Yıllık Deneyim" },
-  { n: "8", l: "Uzman Öğretmen" },
-  { n: "%95", l: "Memnuniyet" },
+  { n: "700+", l: "Mezun Öğrenci" },
+  { n: "2021", l: "Kuruluş Yılı" },
+  { n: "BEDAF", l: "Yetkili Kurum" },
+  { n: "A1–C2", l: "CEFR Sertifikası" },
 ];
 
 export default function HomePage() {
