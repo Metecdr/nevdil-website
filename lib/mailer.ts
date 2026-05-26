@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export type RegistrationData = {
   name: string;
   phone: string;
@@ -20,6 +18,9 @@ export async function sendRegistrationEmail(data: RegistrationData): Promise<voi
     console.log("📧 [Mailer] E-posta gönderilmedi (RESEND_API_KEY veya NOTIFICATION_EMAIL eksik)");
     return;
   }
+
+  // Client'ı key varlığı doğrulandıktan sonra oluştur
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const tarih = new Date().toLocaleString("tr-TR", {
     timeZone: "Europe/Istanbul",
