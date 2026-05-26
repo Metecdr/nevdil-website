@@ -1,49 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createHash } from "crypto";
+
+function makeToken(pass: string): string {
+  return createHash("sha256")
+    .update("nevdil_admin_salt_" + pass)
+    .digest("hex");
+}
 
 export function proxy(request: NextRequest) {
-  // Sadece /admin rotasını koru
+  // Admin rotası dışındaki her şey serbest
   if (!request.nextUrl.pathname.startsWith("/admin")) {
     return NextResponse.next();
   }
 
-  const auth = request.headers.get("authorization");
-
-  if (auth && isValidAuth(auth)) {
+  // Login sayfasına her zaman erişim serbest
+  if (request.nextUrl.pathname.startsWith("/admin/giris")) {
     return NextResponse.next();
   }
 
-  // Yetkisiz — tarayıcıda native şifre kutusu açılır
-  return new NextResponse("Yetkisiz erişim.", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="Nev-Dil Admin"',
-    },
-  });
-}
-
-function isValidAuth(auth: string): boolean {
-  try {
-    const [type, credentials] = auth.split(" ");
-    if (type !== "Basic" || !credentials) return false;
-
-    const decoded = Buffer.from(credentials, "base64").toString("utf-8");
-    const colonIndex = decoded.indexOf(":");
-    if (colonIndex === -1) return false;
-
-    const username = decoded.slice(0, colonIndex);
-    const password = decoded.slice(colonIndex + 1);
-
-    const adminUser = process.env.ADMIN_USER || "admin";
-    const adminPass = process.env.ADMIN_PASSWORD;
-
-    if (!adminPass) return false; // Şifre ayarlanmamışsa erişim yok
-
-    return username === adminUser && password === adminPass;
-  } catch {
-    return false;
+  // Cookie kontrolü
+  const adminPass = process.env.ADMIN_PASSWORD;
+  if (!adminPass) {
+    // Şifre ayarlanmamışsa login sayfasına yönlendir
+    return NextResponse.redirect(new URL("/admin/giris", request.url));
   }
+
+  const sessionCookie = request.cookies.get("nevdil_admin")?.value;
+  const expectedToken = makeToken(adminPass);
+
+  if (sessionCookie !== expectedToken) {
+    const loginUrl = new URL("/admin/giris", request.url);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin", "/admin/:path*"],
 };
