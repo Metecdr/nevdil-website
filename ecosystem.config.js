@@ -23,6 +23,11 @@ module.exports = {
       max_restarts: 10,
       min_uptime: "10s",
 
+      // Graceful shutdown: aktif isteklere 8s tanı, sonra zorla kapat
+      kill_timeout: 8000,
+      // Başlangıçta port dinlenene kadar 5s bekle
+      listen_timeout: 5000,
+
       // Log ayarları
       error_file: "/var/log/pm2/nevdil-error.log",
       out_file: "/var/log/pm2/nevdil-out.log",

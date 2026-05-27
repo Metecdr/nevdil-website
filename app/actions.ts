@@ -22,83 +22,100 @@ async function getClientIp(): Promise<string> {
   );
 }
 
+// ─── Telefon doğrulama yardımcısı (her iki formda aynı) ───────────────────
+function isValidPhone(phone: string): boolean {
+  return phone.replace(/\D/g, "").length >= 10;
+}
+
 // ─── Ön Kayıt (Ana form) ───────────────────────────────────────────────────
 export async function submitOnKayit(
   prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  // 1. Honeypot kontrolü — bot tuzağı
-  const honeypot = formData.get("website")?.toString();
-  if (honeypot) {
-    // Bot yakalandı — başarılıymış gibi göster, alarm verme
-    return { success: true, message: "Başvurunuz alındı!" };
-  }
+  try {
+    // 1. Honeypot kontrolü — bot tuzağı
+    const honeypot = formData.get("website")?.toString();
+    if (honeypot) {
+      return { success: true, message: "Başvurunuz alındı!" };
+    }
 
-  // 2. Rate limiting
-  const ip = await getClientIp();
-  const { allowed } = checkRateLimit(ip);
-  if (!allowed) {
+    // 2. Rate limiting
+    const ip = await getClientIp();
+    const { allowed } = checkRateLimit(ip);
+    if (!allowed) {
+      return {
+        success: false,
+        message: "Çok fazla deneme yaptınız. Lütfen 10 dakika bekleyin.",
+      };
+    }
+
+    // 3. Alanları al ve sanitize et
+    const kvkk = formData.get("kvkk")?.toString();
+    const raw = {
+      name: formData.get("name")?.toString() ?? "",
+      phone: formData.get("phone")?.toString() ?? "",
+      program: formData.get("program")?.toString() ?? "Belirtilmedi",
+      ageGroup: formData.get("ageGroup")?.toString() ?? "",
+      email: formData.get("email")?.toString() ?? "",
+      message: formData.get("message")?.toString() ?? "",
+    };
+    const { name, phone, program, ageGroup, email, message } = sanitizeFormData(raw);
+
+    // 4. Temel doğrulama
+    if (!name || name.length < 2) {
+      return { success: false, message: "Lütfen geçerli bir ad soyad girin." };
+    }
+    if (!phone || !isValidPhone(phone)) {
+      return { success: false, message: "Lütfen geçerli bir telefon numarası girin." };
+    }
+    if (!program) {
+      return { success: false, message: "Lütfen bir program seçin." };
+    }
+    if (!kvkk) {
+      return { success: false, message: "Devam etmek için KVKK onayı gereklidir." };
+    }
+
+    // 5. İçerik filtresi
+    const filter = filterContent({ name, message, phone });
+    if (!filter.ok) {
+      return { success: false, message: filter.reason };
+    }
+
+    // 6. Log
+    console.log("🟡 [action] Yeni Ön Kayıt:", {
+      ad_soyad: name,
+      telefon: phone,
+      program,
+      yas_sinif: ageGroup || "—",
+      eposta: email || "—",
+      tarih: new Date().toLocaleString("tr-TR"),
+      ip,
+    });
+
+    // 7. Dosyaya kaydet
+    const saved = saveRegistration({ name, phone, program, ageGroup, email, message, ip });
+    if (!saved) {
+      return {
+        success: false,
+        message: "Bir sorun oluştu, lütfen tekrar deneyin veya bizi arayın.",
+      };
+    }
+
+    // 8. E-posta bildirimi (hata olursa form yine de başarılı döner)
+    try {
+      await sendRegistrationEmail({ name, phone, program, ageGroup, email, message });
+    } catch (err) {
+      console.error("📧 [action] E-posta gönderilemedi:", err);
+    }
+
+    return { success: true, message: "Başvurunuz alındı!" };
+  } catch (err) {
+    console.error("💥 [action] submitOnKayit beklenmedik hata:", err);
     return {
       success: false,
-      message: "Çok fazla deneme yaptınız. Lütfen 10 dakika bekleyin.",
+      message: "Beklenmedik bir sorun oluştu. Lütfen WhatsApp'tan bize yazın.",
     };
   }
-
-  // 3. Alanları al ve sanitize et
-  const kvkk = formData.get("kvkk")?.toString();
-  const raw = {
-    name: formData.get("name")?.toString() ?? "",
-    phone: formData.get("phone")?.toString() ?? "",
-    program: formData.get("program")?.toString() ?? "Belirtilmedi",
-    ageGroup: formData.get("ageGroup")?.toString() ?? "",
-    email: formData.get("email")?.toString() ?? "",
-    message: formData.get("message")?.toString() ?? "",
-  };
-  const { name, phone, program, ageGroup, email, message } = sanitizeFormData(raw);
-
-  // 4. Temel doğrulama
-  if (!name || name.length < 2) {
-    return { success: false, message: "Lütfen geçerli bir ad soyad girin." };
-  }
-  if (!phone || phone.replace(/\D/g, "").length < 10) {
-    return { success: false, message: "Lütfen geçerli bir telefon numarası girin." };
-  }
-  if (!program || program === "") {
-    return { success: false, message: "Lütfen bir program seçin." };
-  }
-  if (!kvkk) {
-    return { success: false, message: "Devam etmek için KVKK onayı gereklidir." };
-  }
-
-  // 5. İçerik filtresi
-  const filter = filterContent({ name, message, phone });
-  if (!filter.ok) {
-    return { success: false, message: filter.reason };
-  }
-
-  // 6. Log
-  console.log("🟡 Yeni Ön Kayıt:", {
-    ad_soyad: name,
-    telefon: phone,
-    program,
-    yas_sinif: ageGroup || "—",
-    eposta: email || "—",
-    mesaj: message || "—",
-    tarih: new Date().toLocaleString("tr-TR"),
-    ip,
-  });
-
-  // 7. Dosyaya kaydet
-  saveRegistration({ name, phone, program, ageGroup, email, message, ip });
-
-  // 8. E-posta bildirimi (hata olursa form yine de başarılı döner)
-  try {
-    await sendRegistrationEmail({ name, phone, program, ageGroup, email, message });
-  } catch (err) {
-    console.error("📧 E-posta gönderilemedi:", err);
-  }
-
-  return { success: true, message: "Başvurunuz alındı!" };
 }
 
 // ─── Genel İletişim Formu ──────────────────────────────────────────────────
@@ -106,55 +123,67 @@ export async function submitForm(
   prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
-  // 1. Honeypot
-  const honeypot = formData.get("website")?.toString();
-  if (honeypot) {
-    return { success: true, message: "Başvurunuz alındı! En kısa sürede sizi arayacağız. 🎉" };
-  }
+  try {
+    // 1. Honeypot
+    const honeypot = formData.get("website")?.toString();
+    if (honeypot) {
+      return { success: true, message: "Başvurunuz alındı! En kısa sürede sizi arayacağız. 🎉" };
+    }
 
-  // 2. Rate limiting
-  const ip = await getClientIp();
-  const { allowed } = checkRateLimit(ip);
-  if (!allowed) {
+    // 2. Rate limiting
+    const ip = await getClientIp();
+    const { allowed } = checkRateLimit(ip);
+    if (!allowed) {
+      return {
+        success: false,
+        message: "Çok fazla deneme yaptınız. Lütfen 10 dakika bekleyin.",
+      };
+    }
+
+    // 3. Sanitize
+    const { name, phone, email, program, message } = sanitizeFormData({
+      name: formData.get("name")?.toString() ?? "",
+      phone: formData.get("phone")?.toString() ?? "",
+      email: formData.get("email")?.toString() ?? "",
+      program: formData.get("program")?.toString() ?? "Belirtilmedi",
+      ageGroup: formData.get("ageGroup")?.toString() ?? "",
+      message: formData.get("message")?.toString() ?? "",
+    });
+
+    // 4. Doğrulama (submitOnKayit ile aynı mantık)
+    if (!name || name.length < 2) {
+      return { success: false, message: "Lütfen geçerli bir ad soyad girin." };
+    }
+    if (!phone || !isValidPhone(phone)) {
+      return { success: false, message: "Lütfen geçerli bir telefon numarası girin." };
+    }
+
+    // 5. İçerik filtresi
+    const filter = filterContent({ name, message, phone });
+    if (!filter.ok) {
+      return { success: false, message: filter.reason };
+    }
+
+    // 6. Log
+    console.log("🟡 [action] Yeni İletişim Başvurusu:", {
+      ad_soyad: name,
+      telefon: phone,
+      eposta: email || "—",
+      program,
+      mesaj: message || "—",
+      tarih: new Date().toLocaleString("tr-TR"),
+      ip,
+    });
+
+    return {
+      success: true,
+      message: "Başvurunuz alındı! En kısa sürede sizi arayacağız. 🎉",
+    };
+  } catch (err) {
+    console.error("💥 [action] submitForm beklenmedik hata:", err);
     return {
       success: false,
-      message: "Çok fazla deneme yaptınız. Lütfen 10 dakika bekleyin.",
+      message: "Beklenmedik bir sorun oluştu. Lütfen WhatsApp'tan bize yazın.",
     };
   }
-
-  const { name, phone, email, program, message } = sanitizeFormData({
-    name: formData.get("name")?.toString() ?? "",
-    phone: formData.get("phone")?.toString() ?? "",
-    email: formData.get("email")?.toString() ?? "",
-    program: formData.get("program")?.toString() ?? "Belirtilmedi",
-    ageGroup: formData.get("ageGroup")?.toString() ?? "",
-    message: formData.get("message")?.toString() ?? "",
-  });
-
-  if (!name || name.length < 2) {
-    return { success: false, message: "Lütfen geçerli bir ad soyad girin." };
-  }
-  if (!phone || phone.length < 10) {
-    return { success: false, message: "Lütfen geçerli bir telefon numarası girin." };
-  }
-
-  const filter = filterContent({ name, message, phone });
-  if (!filter.ok) {
-    return { success: false, message: filter.reason };
-  }
-
-  console.log("🟡 Yeni İletişim Başvurusu:", {
-    ad_soyad: name,
-    telefon: phone,
-    eposta: email || "—",
-    program,
-    mesaj: message || "—",
-    tarih: new Date().toLocaleString("tr-TR"),
-    ip,
-  });
-
-  return {
-    success: true,
-    message: "Başvurunuz alındı! En kısa sürede sizi arayacağız. 🎉",
-  };
 }
