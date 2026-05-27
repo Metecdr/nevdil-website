@@ -243,7 +243,7 @@ export default function HakkimizdaPage() {
         </div>
       </section>
 
-      {/* ── ÖĞRETMEN ── */}
+      {/* ── EKİBİMİZ ── */}
       <section className="bg-gray-950 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-10 md:mb-12">
@@ -251,30 +251,91 @@ export default function HakkimizdaPage() {
               Ekibimiz
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-white mt-3">
-              Öğretmenlerimiz
+              Kadromuz
             </h2>
+            <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">
+              Alanında uzman, öğrenci odaklı ve deneyimli eğitimcilerden oluşan ekibimizle tanışın.
+            </p>
           </div>
-          <div className="max-w-xs mx-auto">
-            <div className="bg-black border border-yellow-400/30 rounded-2xl p-8 text-center hover:border-yellow-400/60 transition-all">
-              <div className="w-28 h-28 bg-yellow-400/10 border-2 border-yellow-400/40 rounded-full flex items-center justify-center mx-auto mb-5 text-5xl">
-                👩‍🏫
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {/* Şerifegül Yavuz */}
+            <div className="bg-black border border-yellow-400/30 rounded-2xl p-8 hover:border-yellow-400/60 transition-all flex flex-col">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="w-20 h-20 shrink-0 bg-yellow-400/10 border-2 border-yellow-400/40 rounded-full flex items-center justify-center text-4xl">
+                  👩‍🏫
+                </div>
+                <div>
+                  <h3 className="text-white font-black text-xl">Şerifegül Yavuz</h3>
+                  <p className="text-yellow-400 text-sm font-semibold mt-0.5">Kurucu & Baş Öğretmen</p>
+                  <p className="text-gray-600 text-xs mt-0.5">BEDAF Yetkili Sınav Gözetmeni</p>
+                </div>
               </div>
-              <h3 className="text-white font-bold text-xl">Şerifegül Yavuz</h3>
-              <p className="text-yellow-400 text-sm font-semibold mt-1">Kurucu & Baş Öğretmen</p>
-              <p className="text-gray-600 text-xs mt-1 mb-4">BEDAF Yetkili Sınav Gözetmeni</p>
-              <div className="flex flex-wrap gap-2 justify-center">
-                <span className="bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs px-2.5 py-1 rounded-full">
-                  5+ Yıl Deneyim
-                </span>
-                <span className="bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs px-2.5 py-1 rounded-full">
-                  BEDAF Certified
-                </span>
+              <div className="border-t border-yellow-400/10 pt-5 mb-5">
+                <div className="flex items-start gap-2 mb-3">
+                  <span className="text-yellow-400 mt-0.5">🎓</span>
+                  <p className="text-gray-400 text-sm">
+                    Ordu Üniversitesi <span className="text-white font-medium">İngiliz Dili ve Edebiyatı</span> mezunu.
+                    Pedagojik formasyon eğitimini tamamlamış, çocuklara yönelik yabancı dil öğretimi konusunda özel eğitimler almış.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-yellow-400 mt-0.5">💡</span>
+                  <p className="text-gray-400 text-sm">
+                    Öğrencilerinin dili ezberleyerek değil, anlayarak ve günlük yaşamla ilişkilendirerek öğrenmesine odaklanır.
+                    Konuşma becerisi, telaffuz ve özgüven kazanımı temel ilkeleri arasındadır.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {["5+ Yıl Deneyim", "BEDAF Certified", "Pedagojik Formasyon", "Erken Yaş Uzmanı"].map((tag) => (
+                  <span key={tag} className="bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs px-2.5 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
+
+            {/* Rümeysa Değirmenci */}
+            <div className="bg-black border border-yellow-400/30 rounded-2xl p-8 hover:border-yellow-400/60 transition-all flex flex-col">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="w-20 h-20 shrink-0 bg-yellow-400/10 border-2 border-yellow-400/40 rounded-full flex items-center justify-center text-4xl">
+                  👩‍💼
+                </div>
+                <div>
+                  <h3 className="text-white font-black text-xl">Rümeysa Değirmenci</h3>
+                  <p className="text-yellow-400 text-sm font-semibold mt-0.5">Kurum Müdürü</p>
+                  <p className="text-gray-600 text-xs mt-0.5">8 Yıllık Eğitim Deneyimi</p>
+                </div>
+              </div>
+              <div className="border-t border-yellow-400/10 pt-5 mb-5">
+                <div className="flex items-start gap-2 mb-3">
+                  <span className="text-yellow-400 mt-0.5">🎓</span>
+                  <p className="text-gray-400 text-sm">
+                    Kırşehir <span className="text-white font-medium">Ahi Evran Üniversitesi</span> mezunu.
+                    Akademik gelişimini <span className="text-white font-medium">Kapadokya Üniversitesi</span>&apos;nde yüksek lisans eğitimiyle güçlendirmiştir.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-yellow-400 mt-0.5">💡</span>
+                  <p className="text-gray-400 text-sm">
+                    6 yıl Millî Eğitim Bakanlığı&apos;na bağlı okullarda öğretmenlik yaparak kariyerinin 8. yılında
+                    Nev-Dil bünyesinde müdürlük görevini üstlenmiştir. Disiplinli, yenilikçi ve öğrenci merkezli yaklaşımıyla
+                    kurumumuzun gelişimine öncülük etmektedir.
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {["8 Yıl Deneyim", "Yüksek Lisans", "MEB Deneyimi", "Öğrenci Odaklı"].map((tag) => (
+                  <span key={tag} className="bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs px-2.5 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
           </div>
-          <p className="text-center text-gray-700 text-xs mt-6">
-            * Diğer öğretmen bilgileri ve fotoğrafları yakında güncellenecektir.
-          </p>
         </div>
       </section>
 
