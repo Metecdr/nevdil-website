@@ -1,0 +1,17 @@
+{
+  "name": "Nev-Dil Yabancı Dil Kursu",
+  "short_name": "Nev-Dil",
+  "description": "Nevşehir'in öncü İngilizce kursu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#EAB308",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

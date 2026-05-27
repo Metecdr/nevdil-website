@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +23,12 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   metadataBase: new URL(SITE_URL),
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+    ],
     apple: "/logo.png",
+    other: [{ rel: "manifest", url: "/site.webmanifest" }],
   },
   openGraph: {
     type: "website",
@@ -62,6 +67,7 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-black text-white">
+        <LocalBusinessSchema />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
