@@ -115,12 +115,13 @@ export default function HakkimizdaPage() {
 
             {/* Yetkili Kurum */}
             <div className="bg-gray-950 border border-yellow-400/25 rounded-2xl overflow-hidden hover:border-yellow-400/60 transition-all group">
-              {/* PDF Önizleme */}
+              {/* PNG Önizleme */}
               <div className="relative bg-gray-900 h-56 md:h-64 overflow-hidden">
-                <iframe
-                  src="/belgeler/yetkili-kurum.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
-                  className="w-full h-full border-0 pointer-events-none"
-                  title="BEDAF Yetkili Kurum Belgesi"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/belgeler/yetkili-kurum.png"
+                  alt="BEDAF Yetkili Kurum Sertifikası"
+                  className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
               </div>
@@ -153,10 +154,11 @@ export default function HakkimizdaPage() {
             {/* Yetkili Sınav Gözetmeni */}
             <div className="bg-gray-950 border border-yellow-400/25 rounded-2xl overflow-hidden hover:border-yellow-400/60 transition-all group">
               <div className="relative bg-gray-900 h-56 md:h-64 overflow-hidden">
-                <iframe
-                  src="/belgeler/yetkili-sinav-gozetmeni.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
-                  className="w-full h-full border-0 pointer-events-none"
-                  title="BEDAF Yetkili Sınav Gözetmeni Belgesi"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/belgeler/yetkili-sinav-gozetmeni.png"
+                  alt="BEDAF Yetkili Sınav Gözetmeni Sertifikası"
+                  className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
               </div>
