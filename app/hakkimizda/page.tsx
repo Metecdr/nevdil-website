@@ -272,21 +272,29 @@ export default function HakkimizdaPage() {
                   <p className="text-gray-600 text-xs mt-0.5">BEDAF Yetkili Sınav Gözetmeni</p>
                 </div>
               </div>
-              <div className="border-t border-yellow-400/10 pt-5 mb-5">
-                <div className="flex items-start gap-2 mb-3">
-                  <span className="text-yellow-400 mt-0.5">🎓</span>
-                  <p className="text-gray-400 text-sm">
-                    Ordu Üniversitesi <span className="text-white font-medium">İngiliz Dili ve Edebiyatı</span> mezunu.
-                    Pedagojik formasyon eğitimini tamamlamış, çocuklara yönelik yabancı dil öğretimi konusunda özel eğitimler almış.
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-yellow-400 mt-0.5">💡</span>
-                  <p className="text-gray-400 text-sm">
-                    Öğrencilerinin dili ezberleyerek değil, anlayarak ve günlük yaşamla ilişkilendirerek öğrenmesine odaklanır.
-                    Konuşma becerisi, telaffuz ve özgüven kazanımı temel ilkeleri arasındadır.
-                  </p>
-                </div>
+              <div className="border-t border-yellow-400/10 pt-5 mb-5 space-y-3">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Ordu Üniversitesi <span className="text-white font-medium">İngiliz Dili ve Edebiyatı</span> bölümü mezunu,
+                  pedagojik formasyon eğitimini tamamlamış ve çocuklara yönelik yabancı dil öğretimi konusunda
+                  özel eğitimler almış bir İngilizce öğretmeniyim. Eğitim hayatım boyunca İngiliz dili, edebiyatı,
+                  dilbilimi ve öğretim yöntemleri üzerine kapsamlı bir eğitim alarak hem akademik hem de pedagojik
+                  anlamda kendimi geliştirdim.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Özellikle çocuklara yabancı dil öğretimi konusunda aldığım eğitimler sayesinde, erken yaş
+                  gruplarının öğrenme süreçlerini daha iyi anlayarak onların dikkatini çekecek, eğlenceli ve
+                  etkileşimli dersler planlayabiliyorum.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Öğretmenlik yaklaşımımda öğrencilerin dili yalnızca ezberleyerek değil, anlayarak ve günlük
+                  yaşamla ilişkilendirerek öğrenmelerine önem veriyorum.{" "}
+                  <span className="text-white font-medium">Konuşma becerisi, telaffuz, kelime gelişimi ve özgüven kazanımı</span>{" "}
+                  üzerine odaklanarak öğrencilerimin İngilizceyi doğal ve akıcı bir şekilde kullanabilmelerini hedefliyorum.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Her öğrencinin öğrenme stilinin farklı olduğuna inanıyor; sabırlı, destekleyici ve öğrenci odaklı
+                  bir yaklaşım benimseyerek güvenli ve motive edici bir öğrenme ortamı oluşturuyorum.
+                </p>
               </div>
               <div className="flex flex-wrap gap-2 mt-auto">
                 {["5+ Yıl Deneyim", "BEDAF Certified", "Pedagojik Formasyon", "Erken Yaş Uzmanı"].map((tag) => (
@@ -309,22 +317,25 @@ export default function HakkimizdaPage() {
                   <p className="text-gray-600 text-xs mt-0.5">8 Yıllık Eğitim Deneyimi</p>
                 </div>
               </div>
-              <div className="border-t border-yellow-400/10 pt-5 mb-5">
-                <div className="flex items-start gap-2 mb-3">
-                  <span className="text-yellow-400 mt-0.5">🎓</span>
-                  <p className="text-gray-400 text-sm">
-                    Kırşehir <span className="text-white font-medium">Ahi Evran Üniversitesi</span> mezunu.
-                    Akademik gelişimini <span className="text-white font-medium">Kapadokya Üniversitesi</span>&apos;nde yüksek lisans eğitimiyle güçlendirmiştir.
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="text-yellow-400 mt-0.5">💡</span>
-                  <p className="text-gray-400 text-sm">
-                    6 yıl Millî Eğitim Bakanlığı&apos;na bağlı okullarda öğretmenlik yaparak kariyerinin 8. yılında
-                    Nev-Dil bünyesinde müdürlük görevini üstlenmiştir. Disiplinli, yenilikçi ve öğrenci merkezli yaklaşımıyla
-                    kurumumuzun gelişimine öncülük etmektedir.
-                  </p>
-                </div>
+              <div className="border-t border-yellow-400/10 pt-5 mb-5 space-y-3">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Kurum müdürümüz Rümeysa Değirmenci, eğitim alanındaki birikimi, akademik donanımı ve
+                  öğrenci odaklı yaklaşımıyla yabancı dil eğitimine değer katmaktadır.{" "}
+                  <span className="text-white font-medium">Kırşehir Ahi Evran Üniversitesi</span> mezunu olan müdürümüz,
+                  akademik gelişimini <span className="text-white font-medium">Kapadokya Üniversitesi</span>&apos;nde
+                  yüksek lisans eğitimiyle güçlendirmiştir.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Meslek hayatı boyunca <span className="text-white font-medium">6 yıl Millî Eğitim Bakanlığı</span>&apos;na
+                  bağlı okullarda öğretmenlik yaparak birçok öğrencinin akademik ve kişisel gelişimine katkı sağlamıştır.
+                  Eğitime duyduğu ilgi ve yönetim alanındaki tecrübesiyle kariyerinin 8. yılında Nev-Dil bünyesinde
+                  aktif olarak müdürlük görevini sürdürmektedir.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Öğrencilerle birebir ilgilenmeyi önemseyen, her öğrencinin öğrenme sürecini yakından takip eden
+                  müdürümüz; disiplinli, yenilikçi ve öğrenci merkezli eğitim anlayışıyla kurumumuzun gelişimine
+                  öncülük etmektedir.
+                </p>
               </div>
               <div className="flex flex-wrap gap-2 mt-auto">
                 {["8 Yıl Deneyim", "Yüksek Lisans", "MEB Deneyimi", "Öğrenci Odaklı"].map((tag) => (
