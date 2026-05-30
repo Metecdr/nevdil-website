@@ -46,12 +46,9 @@ export default function HakkimizdaPage() {
             Hakkımızda
           </h1>
           <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Nevşehir&apos;in ilk ve tek yerli çocuk yaş gruplarına İngilizce dil eğitimi
-            veren kurumu olarak, <span className="text-yellow-400 font-semibold">2 Ekim 2021</span>&apos;de
-            kurulduk. Beş yıldır, yaklaşık <span className="text-yellow-400 font-semibold">700 öğrencimizi</span> mezun
-            ederek güvenilir ve kaliteli bir eğitim sunuyoruz. Öğrenci odaklı yaklaşımımız,
-            modern ve eğlenceli öğretim yöntemlerimiz ve bireysel gelişime verdiğimiz önemle,
-            Nevşehir&apos;de İngilizce öğrenmenin en güvenilir adresi olmaktan gurur duyuyoruz.
+            Nevşehir&apos;in ilk ve tek yerli kurumu <span className="text-yellow-400 font-semibold">Nev-Dil Yabancı Dil Kursu</span>,
+            küçük yaş gruplarına İngilizce dil eğitimi veren kurum olarak{" "}
+            <span className="text-yellow-400 font-semibold">2 Ekim 2021</span>&apos;de kurulmuştur.
           </p>
         </div>
       </section>
@@ -258,7 +255,50 @@ export default function HakkimizdaPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {/* Ali Tiftik — Kurucu */}
+            <div className="bg-black border border-yellow-400/30 rounded-2xl p-8 hover:border-yellow-400/60 transition-all flex flex-col">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="w-20 h-20 shrink-0 bg-yellow-400/10 border-2 border-yellow-400/40 rounded-full flex items-center justify-center text-4xl">
+                  👨‍💼
+                </div>
+                <div>
+                  <h3 className="text-white font-black text-xl">Ali Tiftik</h3>
+                  <p className="text-yellow-400 text-sm font-semibold mt-0.5">Kurucu</p>
+                  <p className="text-gray-600 text-xs mt-0.5">Nevşehir Hacı Bektaş Veli Üniversitesi</p>
+                </div>
+              </div>
+              <div className="border-t border-yellow-400/10 pt-5 mb-5 space-y-3">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Eğitimin bireylerin hayatındaki dönüştürücü gücüne inanan{" "}
+                  <span className="text-white font-medium">Ali Tiftik</span>,
+                  Nevşehir Hacı Bektaş Veli Üniversitesi mezunudur. Uzun yıllar eğitim sektöründe
+                  yöneticilik görevlerinde bulunarak eğitim kurumlarının planlanması, organizasyonu
+                  ve gelişimi konusunda önemli deneyimler kazanmıştır.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Yabancı dil eğitiminin günümüz dünyasındaki öneminin farkında olan Ali Tiftik,
+                  kaliteli, ulaşılabilir ve öğrenci odaklı bir eğitim anlayışıyla kurumumuzu hayata
+                  geçirmiştir. Kurumumuzun temel hedefi; öğrencilerimizin yabancı dili sadece öğrenmelerini
+                  değil, aynı zamanda{" "}
+                  <span className="text-white font-medium">etkin ve özgüvenli bir şekilde kullanmalarını</span>{" "}
+                  sağlamaktır.
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Sürekli gelişimi, yenilikçi eğitim yaklaşımlarını ve güçlü iletişimi merkeze alan
+                  Ali Tiftik, eğitimin bireysel ve toplumsal gelişimin en önemli anahtarlarından biri
+                  olduğuna inanmakta ve bu anlayışla çalışmalarını sürdürmektedir.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {["Kurucu", "Eğitim Yöneticisi", "Öğrenci Odaklı", "Yenilikçi Yaklaşım"].map((tag) => (
+                  <span key={tag} className="bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs px-2.5 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             {/* Şerifegül Yavuz */}
             <div className="bg-black border border-yellow-400/30 rounded-2xl p-8 hover:border-yellow-400/60 transition-all flex flex-col">
@@ -268,7 +308,7 @@ export default function HakkimizdaPage() {
                 </div>
                 <div>
                   <h3 className="text-white font-black text-xl">Şerifegül Yavuz</h3>
-                  <p className="text-yellow-400 text-sm font-semibold mt-0.5">Kurucu & Baş Öğretmen</p>
+                  <p className="text-yellow-400 text-sm font-semibold mt-0.5">Baş Öğretmen</p>
                   <p className="text-gray-600 text-xs mt-0.5">BEDAF Yetkili Sınav Gözetmeni</p>
                 </div>
               </div>
