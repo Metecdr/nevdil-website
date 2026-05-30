@@ -103,7 +103,7 @@ export default function IletisimPage() {
               {/* Google Maps */}
               <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
                 <iframe
-                  src="https://maps.google.com/maps?q=15+Temmuz+Mah.+154.+Sok.+No:6B+Nevsehir&hl=tr&z=16&output=embed"
+                  src="https://maps.google.com/maps?q=38.6239,34.7239&hl=tr&z=17&output=embed"
                   width="100%"
                   height="220"
                   style={{ border: 0 }}
