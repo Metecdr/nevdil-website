@@ -103,7 +103,7 @@ export default function IletisimPage() {
               {/* Google Maps */}
               <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
                 <iframe
-                  src="https://maps.google.com/maps?q=38.658440,34.734528&hl=tr&z=18&output=embed"
+                  src="https://maps.google.com/maps?q=Nev-Dil+Yabancı+Dil+Kursu+Nevşehir&hl=tr&z=17&output=embed"
                   width="100%"
                   height="220"
                   style={{ border: 0 }}
