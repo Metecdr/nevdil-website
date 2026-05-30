@@ -25,9 +25,8 @@ export default function LocalBusinessSchema() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      // Nevşehir merkez koordinatları (yaklaşık)
-      latitude: 38.6239,
-      longitude: 34.7239,
+      latitude: 38.658440,
+      longitude: 34.734528,
     },
     openingHoursSpecification: [
       {
