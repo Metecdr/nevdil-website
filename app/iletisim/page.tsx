@@ -100,12 +100,18 @@ export default function IletisimPage() {
                 </Link>
               </div>
 
-              {/* Harita placeholder */}
-              <div className="bg-gray-950 border border-gray-800 rounded-2xl h-40 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-3xl mb-1">🗺️</div>
-                  <p className="text-gray-600 text-xs">Harita yakında eklenecek</p>
-                </div>
+              {/* Google Maps */}
+              <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
+                <iframe
+                  src="https://maps.google.com/maps?q=15+Temmuz+Mah.+154.+Sok.+No:6B+Nevsehir&hl=tr&z=16&output=embed"
+                  width="100%"
+                  height="220"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Nev-Dil Yabancı Dil Kursu Konumu"
+                />
               </div>
             </div>
 
