@@ -8,28 +8,27 @@ function makeToken(pass: string): string {
 }
 
 export function proxy(request: NextRequest) {
-  // Admin rotası dışındaki her şey serbest
-  if (!request.nextUrl.pathname.startsWith("/admin")) {
+  // Panel rotası dışındaki her şey serbest
+  if (!request.nextUrl.pathname.startsWith("/nvd-panel")) {
     return NextResponse.next();
   }
 
   // Login sayfasına her zaman erişim serbest
-  if (request.nextUrl.pathname.startsWith("/admin/giris")) {
+  if (request.nextUrl.pathname.startsWith("/nvd-panel/giris")) {
     return NextResponse.next();
   }
 
   // Cookie kontrolü
   const adminPass = process.env.ADMIN_PASSWORD;
   if (!adminPass) {
-    // Şifre ayarlanmamışsa login sayfasına yönlendir
-    return NextResponse.redirect(new URL("/admin/giris", request.url));
+    return NextResponse.redirect(new URL("/nvd-panel/giris", request.url));
   }
 
   const sessionCookie = request.cookies.get("nevdil_admin")?.value;
   const expectedToken = makeToken(adminPass);
 
   if (sessionCookie !== expectedToken) {
-    const loginUrl = new URL("/admin/giris", request.url);
+    const loginUrl = new URL("/nvd-panel/giris", request.url);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -37,5 +36,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*"],
+  matcher: ["/nvd-panel", "/nvd-panel/:path*"],
 };

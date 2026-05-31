@@ -33,11 +33,11 @@ export async function loginAction(
     path: "/",
   });
 
-  redirect("/admin");
+  redirect("/nvd-panel");
 }
 
 export async function logoutAction(): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.delete("nevdil_admin");
-  redirect("/admin/giris");
+  redirect("/nvd-panel/giris");
 }
