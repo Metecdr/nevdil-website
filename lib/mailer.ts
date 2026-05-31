@@ -69,6 +69,11 @@ export async function sendRegistrationEmail(data: RegistrationData): Promise<voi
           <div style="margin-top: 24px; padding: 14px; background: #111; border-radius: 10px; border-left: 3px solid #EAB308;">
             <p style="margin: 0; color: #666; font-size: 12px;">📅 ${tarih}</p>
           </div>
+          <div style="margin-top: 16px; text-align: center;">
+            <a href="https://nevdil.com/admin" style="display: inline-block; background: #EAB308; color: #000; font-weight: 900; font-size: 14px; padding: 12px 28px; border-radius: 50px; text-decoration: none;">
+              Admin Paneline Git →
+            </a>
+          </div>
         </div>
       </div>
     `,
