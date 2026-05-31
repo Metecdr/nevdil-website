@@ -71,6 +71,9 @@ export async function submitOnKayit(
     if (!program) {
       return { success: false, message: "Lütfen bir program seçin." };
     }
+    if (!email || !email.includes("@")) {
+      return { success: false, message: "Lütfen geçerli bir e-posta adresi girin." };
+    }
     if (!kvkk) {
       return { success: false, message: "Devam etmek için KVKK onayı gereklidir." };
     }

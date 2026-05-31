@@ -166,11 +166,12 @@ export default function OnKayitForm() {
       {/* E-posta */}
       <div>
         <label className="text-gray-400 text-sm font-medium block mb-1.5">
-          E-posta
+          E-posta <span className="text-yellow-400">*</span>
         </label>
         <input
           name="email"
           type="email"
+          required
           autoComplete="email"
           placeholder="ornek@email.com"
           className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
