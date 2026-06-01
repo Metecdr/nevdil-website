@@ -48,7 +48,7 @@ export default function LocalBusinessSchema() {
       contactType: "customer service",
       availableLanguage: ["Turkish", "English"],
     },
-    sameAs: [],
+    sameAs: ["https://www.instagram.com/nevdil_/"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "İngilizce Kursları",
