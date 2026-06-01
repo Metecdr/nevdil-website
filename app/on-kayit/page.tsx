@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import OnKayitForm from "@/components/OnKayitForm";
 
 export const metadata: Metadata = {
@@ -31,12 +32,12 @@ export default function OnKayitPage() {
       <div className="relative max-w-lg mx-auto px-4 pt-12 pb-20">
         {/* Başlık */}
         <div className="text-center mb-10 animate-fade-in-up">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/logo.png"
             alt="Nev-Dil Logo"
             width={64}
             height={64}
+            priority
             className="rounded-full mx-auto mb-4"
           />
           <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">

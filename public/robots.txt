@@ -10,3 +10,8 @@ Disallow: /on-kayit
 # API ve sistem yolları
 Disallow: /api/
 Disallow: /_next/
+
+# Admin paneli
+Disallow: /nvd-panel
+
+Sitemap: https://nevdil.com/sitemap.xml

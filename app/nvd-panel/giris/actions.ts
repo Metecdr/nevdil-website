@@ -2,13 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createHash } from "crypto";
-
-function makeToken(pass: string): string {
-  return createHash("sha256")
-    .update("nevdil_admin_salt_" + pass)
-    .digest("hex");
-}
+import { makeToken, ADMIN_COOKIE } from "@/lib/admin-auth";
 
 export async function loginAction(
   _prev: { error: string } | null,
@@ -25,7 +19,7 @@ export async function loginAction(
   }
 
   const cookieStore = await cookies();
-  cookieStore.set("nevdil_admin", makeToken(adminPass), {
+  cookieStore.set(ADMIN_COOKIE, makeToken(adminPass), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
@@ -38,6 +32,6 @@ export async function loginAction(
 
 export async function logoutAction(): Promise<void> {
   const cookieStore = await cookies();
-  cookieStore.delete("nevdil_admin");
+  cookieStore.delete(ADMIN_COOKIE);
   redirect("/nvd-panel/giris");
 }

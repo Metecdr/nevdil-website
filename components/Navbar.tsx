@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const links = [
@@ -20,12 +21,12 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/logo.png"
             alt="Nev-Dil Logo"
             width={42}
             height={42}
+            priority
             className="rounded-full group-hover:opacity-90 transition-opacity"
           />
           <span className="flex items-center gap-0 text-2xl font-black tracking-tight">
@@ -61,7 +62,9 @@ export default function Navbar() {
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden text-white p-2 -mr-1 rounded-lg hover:bg-white/10 transition-colors"
-          aria-label="Menü"
+          aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           {open ? (
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,7 +80,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-black border-t border-yellow-400/20 px-4 py-4 flex flex-col gap-1">
+        <div id="mobile-menu" className="md:hidden bg-black border-t border-yellow-400/20 px-4 py-4 flex flex-col gap-1">
           {links.map((l) => (
             <Link
               key={l.href}

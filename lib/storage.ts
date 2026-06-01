@@ -74,6 +74,48 @@ export function getRegistrations(): Registration[] {
   }
 }
 
+/**
+ * Belirli bir kaydı id'ye göre siler.
+ * Atomik: temp dosyaya yazıp rename eder — yarım yazma riski yok.
+ * true = silindi, false = bulunamadı veya hata.
+ */
+export function deleteRegistration(id: string): boolean {
+  try {
+    if (!fs.existsSync(FILE)) return false;
+
+    const lines = fs
+      .readFileSync(FILE, "utf-8")
+      .trim()
+      .split("\n")
+      .filter(Boolean);
+
+    let found = false;
+    const kept: string[] = [];
+    for (const line of lines) {
+      try {
+        const rec = JSON.parse(line) as Registration;
+        if (rec.id === id) {
+          found = true;
+          continue; // bu kaydı atla
+        }
+        kept.push(line);
+      } catch {
+        kept.push(line); // bozuk satırı koru, kaybetme
+      }
+    }
+
+    if (!found) return false;
+
+    const tmp = FILE + ".tmp";
+    fs.writeFileSync(tmp, kept.length ? kept.join("\n") + "\n" : "", "utf-8");
+    fs.renameSync(tmp, FILE);
+    return true;
+  } catch (err) {
+    console.error("💾 [storage] Kayıt silinemedi:", err);
+    return false;
+  }
+}
+
 /** Toplam kayıt sayısını döndürür (satır sayar, parse etmez — hızlı) */
 export function getRegistrationCount(): number {
   try {

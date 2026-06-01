@@ -48,7 +48,7 @@ export default function ContactForm() {
             type="text"
             required
             placeholder="Adınız ve soyadınız"
-            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
+            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
           />
         </div>
 
@@ -61,7 +61,7 @@ export default function ContactForm() {
             type="tel"
             required
             placeholder="0XXX XXX XX XX"
-            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
+            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
           />
         </div>
 
@@ -73,7 +73,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             placeholder="ornek@email.com"
-            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
+            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
           />
         </div>
 
@@ -104,7 +104,7 @@ export default function ContactForm() {
             name="message"
             rows={4}
             placeholder="Sormak istedikleriniz..."
-            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors resize-none"
+            className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors resize-none"
           />
         </div>
 

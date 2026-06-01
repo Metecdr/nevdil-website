@@ -97,7 +97,7 @@ export default function OnKayitForm() {
           required
           autoComplete="name"
           placeholder="Adınız ve soyadınız"
-          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
+          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
         />
       </div>
 
@@ -112,7 +112,7 @@ export default function OnKayitForm() {
           required
           autoComplete="tel"
           placeholder="0XXX XXX XX XX"
-          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
+          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
         />
       </div>
 
@@ -174,7 +174,7 @@ export default function OnKayitForm() {
           required
           autoComplete="email"
           placeholder="ornek@email.com"
-          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors"
+          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
         />
       </div>
 
@@ -187,7 +187,7 @@ export default function OnKayitForm() {
           name="message"
           rows={3}
           placeholder="Eklemek istedikleriniz, sormak istedikleriniz..."
-          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-700 focus:outline-none focus:border-yellow-400 transition-colors resize-none"
+          className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors resize-none"
         />
       </div>
 

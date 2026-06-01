@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Hakkımızda | Nev-Dil Yabancı Dil Kursu",
@@ -114,11 +115,12 @@ export default function HakkimizdaPage() {
             <div className="bg-gray-950 border border-yellow-400/25 rounded-2xl overflow-hidden hover:border-yellow-400/60 transition-all group">
               {/* PNG Önizleme */}
               <div className="relative bg-gray-900 h-56 md:h-64 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/belgeler/yetkili-kurum.png"
                   alt="BEDAF Yetkili Kurum Sertifikası"
-                  className="w-full h-full object-cover object-top"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
               </div>
@@ -151,11 +153,12 @@ export default function HakkimizdaPage() {
             {/* Yetkili Sınav Gözetmeni */}
             <div className="bg-gray-950 border border-yellow-400/25 rounded-2xl overflow-hidden hover:border-yellow-400/60 transition-all group">
               <div className="relative bg-gray-900 h-56 md:h-64 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/belgeler/yetkili-sinav-gozetmeni.png"
                   alt="BEDAF Yetkili Sınav Gözetmeni Sertifikası"
-                  className="w-full h-full object-cover object-top"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent" />
               </div>

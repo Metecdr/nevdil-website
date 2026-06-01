@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -8,8 +9,7 @@ export default function Footer() {
           {/* Logo & Desc */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/logo.png"
                 alt="Nev-Dil Logo"
                 width={46}
