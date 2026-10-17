@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import AdminAccess from "@/components/AdminAccess";
 
 export default function Footer() {
   return (
@@ -77,8 +78,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-yellow-400/10 mt-10 pt-6 text-center text-gray-700 text-xs">
-          © {new Date().getFullYear()} Nev-Dil Yabancı Dil Kursu. Tüm hakları saklıdır.
+        <div className="relative border-t border-yellow-400/10 mt-10 pt-6 text-center text-gray-700 text-xs">
+          <span>© {new Date().getFullYear()} Nev-Dil Yabancı Dil Kursu. Tüm hakları saklıdır.</span>
+          <span className="absolute -right-2 top-4">
+            <AdminAccess />
+          </span>
         </div>
       </div>
     </footer>
