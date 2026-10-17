@@ -93,7 +93,8 @@ with sync_playwright() as p:
     for photo_id in ids:
         assert anonymous.request.get(BASE + "/api/gallery/" + photo_id).status == 404
     public.reload()
-    expect(public.locator("#galeri")).to_have_count(0)
+    expect(public.locator("#galeri")).to_have_count(1)
+    expect(public.get_by_text("Yeni kareler çok yakında")).to_be_visible()
     page.get_by_role("button", name="Çıkış yap", exact=True).click()
     expect(page).to_have_url(BASE + "/nvd-panel/giris")
     assert anonymous.request.get(BASE + "/api/owner/gallery").status == 401
