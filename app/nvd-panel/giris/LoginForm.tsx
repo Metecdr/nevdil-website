@@ -1,35 +1,41 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { loginAction } from "./actions";
 
 export default function LoginForm() {
   const [state, formAction, pending] = useActionState(loginAction, null);
+  const [username, setUsername] = useState("admin");
 
   return (
     <form action={formAction} className="space-y-4">
       {/* Kullanıcı Adı */}
       <div>
-        <label className="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">
+        <label htmlFor="username" className="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">
           Kullanıcı Adı
         </label>
         <input
           name="username"
+          id="username"
+          maxLength={100}
           type="text"
           required
           autoComplete="username"
-          defaultValue="admin"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white placeholder-gray-700 focus:outline-none focus:border-yellow-400/60 transition-colors"
         />
       </div>
 
       {/* Şifre */}
       <div>
-        <label className="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">
+        <label htmlFor="password" className="block text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">
           Şifre
         </label>
         <input
           name="password"
+          id="password"
+          maxLength={256}
           type="password"
           required
           autoComplete="current-password"

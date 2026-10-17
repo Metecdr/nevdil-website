@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import PublicChrome from "@/components/PublicChrome";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -71,12 +72,9 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-black text-white">
-        <GoogleAnalytics />
-        <LocalBusinessSchema />
-        <Navbar />
+        <PublicChrome><GoogleAnalytics /><LocalBusinessSchema /><Navbar /></PublicChrome>
         <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <PublicChrome><Footer /><WhatsAppButton /></PublicChrome>
       </body>
     </html>
   );

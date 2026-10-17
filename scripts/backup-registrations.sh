@@ -13,13 +13,21 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
+# Aynı cron kaydı galeri fotoğraflarını da yedekler. Mevcut kayıt yedekleri korunur.
+GALLERY_STATUS=0
+if [ -f "$ROOT_DIR/.env.local" ]; then
+  node --env-file="$ROOT_DIR/.env.local" "$ROOT_DIR/scripts/backup-gallery.mjs" || GALLERY_STATUS=1
+else
+  node "$ROOT_DIR/scripts/backup-gallery.mjs" || GALLERY_STATUS=1
+fi
+
 SRC="$ROOT_DIR/data/registrations.ndjson"
 BACKUP_DIR="$ROOT_DIR/data/backups"
 RETENTION_DAYS=30
 
 if [ ! -f "$SRC" ]; then
   echo "$(date '+%Y-%m-%d %H:%M:%S') — kaynak yok, atlanıyor: $SRC"
-  exit 0
+  exit "$GALLERY_STATUS"
 fi
 
 mkdir -p "$BACKUP_DIR"
@@ -33,3 +41,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') — yedek alindi: $DEST ($(wc -l < "$DEST") k
 # 30 günden eski yedekleri temizle
 find "$BACKUP_DIR" -name 'registrations-*.ndjson' -type f -mtime +$RETENTION_DAYS -delete
 echo "$(date '+%Y-%m-%d %H:%M:%S') — $RETENTION_DAYS gunden eski yedekler temizlendi"
+exit "$GALLERY_STATUS"

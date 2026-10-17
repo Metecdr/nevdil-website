@@ -15,7 +15,7 @@ export default function OnKayitForm() {
 
         <h2 className="text-white font-black text-3xl mb-2">Ön Kayıt Alındı!</h2>
         <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-xs">
-          Başvurunuz Nev-Dil'e iletildi. Kısa süre içinde sizi arayacağız.
+          Başvurunuz Nev-Dil&apos;e iletildi. Kısa süre içinde sizi arayacağız.
         </p>
 
         {/* Sonraki adımlar */}

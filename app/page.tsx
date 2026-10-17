@@ -1,4 +1,7 @@
 import Link from "next/link";
+import PublicGallery from "@/components/PublicGallery";
+
+export const dynamic = "force-dynamic";
 
 const onkayitlar = [
   {
@@ -185,54 +188,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FOTOĞRAFLAR ── */}
-      <section className="bg-black py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-10 md:mb-14">
-            <span className="text-yellow-400 text-xs font-black uppercase tracking-widest">Galeri</span>
-            <h2 className="text-3xl md:text-5xl font-black text-white mt-3">Kursumuzdan Kareler</h2>
-            <p className="text-gray-500 mt-3 text-sm">Öğrencilerimiz ve öğretmenlerimizle dolu anlar</p>
-          </div>
-
-          {/* Mobil: tek kolon yığını. Desktop: 4 kolon, büyük sol kart */}
-          <div className="hidden md:grid md:grid-cols-4 gap-3" style={{ gridTemplateRows: "200px 200px" }}>
-            <div className="col-span-2 row-span-2 bg-gray-950 border border-yellow-400/15 rounded-2xl flex items-center justify-center hover:border-yellow-400/40 transition-all group">
-              <div className="text-center">
-                <div className="text-5xl mb-2">📸</div>
-                <p className="text-gray-700 text-xs group-hover:text-gray-500 transition-colors">
-                  Fotoğraf yakında eklenecek
-                </p>
-              </div>
-            </div>
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="bg-gray-950 border border-yellow-400/10 rounded-2xl flex items-center justify-center hover:border-yellow-400/30 transition-all"
-              >
-                <span className="text-gray-700 text-sm">📷</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobil galeri placeholder */}
-          <div className="md:hidden grid grid-cols-2 gap-3">
-            <div className="col-span-2 h-44 bg-gray-950 border border-yellow-400/15 rounded-2xl flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-4xl mb-2">📸</div>
-                <p className="text-gray-700 text-xs">Fotoğraf yakında eklenecek</p>
-              </div>
-            </div>
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-28 bg-gray-950 border border-yellow-400/10 rounded-2xl flex items-center justify-center"
-              >
-                <span className="text-gray-700 text-sm">📷</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PublicGallery />
 
       {/* ── CTA ── */}
       <section className="bg-yellow-400 py-16 md:py-24">
