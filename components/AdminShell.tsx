@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { logoutAction } from "@/app/nvd-panel/giris/actions";
 
-export default function AdminShell({ active, children }: { active: "registrations" | "gallery"; children: React.ReactNode }) {
+export default function AdminShell({ active, children }: { active: "registrations" | "campaigns" | "gallery"; children: React.ReactNode }) {
   return <div className="min-h-screen bg-[#0b0c0f] text-white">
     <header className="border-b border-white/10 bg-black/40">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8">
@@ -19,7 +19,7 @@ export default function AdminShell({ active, children }: { active: "registration
     </header>
     <div className="mx-auto max-w-6xl px-5 py-6 sm:px-8 sm:py-8">
       <nav aria-label="Yönetim menüsü" className="mb-9 flex gap-2 border-b border-white/10">
-        {([{ key: "registrations", href: "/nvd-panel", label: "Ön kayıtlar" }, { key: "gallery", href: "/nvd-panel/galeri", label: "Fotoğraf galerisi" }] as const).map((item) =>
+        {([{ key: "registrations", href: "/nvd-panel", label: "Başvurular" }, { key: "campaigns", href: "/nvd-panel/donemler", label: "Kayıt dönemleri" }, { key: "gallery", href: "/nvd-panel/galeri", label: "Fotoğraf galerisi" }] as const).map((item) =>
           <Link key={item.key} href={item.href} aria-current={active === item.key ? "page" : undefined}
             className={`border-b-2 px-4 py-4 text-sm font-semibold transition-colors ${active === item.key ? "border-yellow-400 text-yellow-400" : "border-transparent text-gray-400 hover:text-white"}`}>{item.label}</Link>)}
       </nav>

@@ -26,7 +26,8 @@ if listening():
 
 temporary = Path(tempfile.mkdtemp(prefix="gallery-browser-temp-", dir=DATA)).resolve()
 environment = {**os.environ, "ADMIN_USER": "gallery-local-test", "ADMIN_PASSWORD": secrets.token_hex(24),
-    "GALLERY_DATA_DIR": str(temporary / "gallery"), "SITE_URL": "http://127.0.0.1:4317", "PYTHONIOENCODING": "utf-8"}
+    "GALLERY_DATA_DIR": str(temporary / "gallery"), "CAMPAIGN_DATA_DIR": str(temporary / "campaigns"),
+    "SITE_URL": "http://127.0.0.1:4317", "PYTHONIOENCODING": "utf-8"}
 server = None
 try:
     with (RESULTS / "server.log").open("w", encoding="utf-8") as log:

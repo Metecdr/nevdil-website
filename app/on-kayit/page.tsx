@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import OnKayitForm from "@/components/OnKayitForm";
+import { getPublicCampaigns } from "@/lib/campaign-store";
 
 export const metadata: Metadata = {
   title: "Ön Kayıt | Nev-Dil Yabancı Dil Kursu",
   description:
     "Nev-Dil Yabancı Dil Kursu'na ön kayıt yaptırın. Yaz kursu, YDS hazırlık, junior grupları ve daha fazlası için yerinizi ayırtın.",
 };
+export const dynamic = "force-dynamic";
 
 const programs = [
   { icon: "📚", label: "YDS Hazırlık" },
@@ -16,7 +18,11 @@ const programs = [
   { icon: "🌟", label: "İlkokul" },
 ];
 
-export default function OnKayitPage() {
+export default async function OnKayitPage({ searchParams }: { searchParams: Promise<{ program?: string | string[] }> }) {
+  const campaigns = await getPublicCampaigns();
+  const requested = (await searchParams).program;
+  const requestedProgram = typeof requested === "string" ? requested : "";
+  const initialProgram = campaigns.some((campaign) => campaign.programLabel === requestedProgram) ? requestedProgram : "";
   return (
     <div className="min-h-screen bg-black">
       {/* Dot grid arka plan */}
@@ -64,7 +70,7 @@ export default function OnKayitPage() {
 
         {/* Form kartı */}
         <div className="bg-gray-950 border border-yellow-400/20 rounded-2xl p-5 md:p-7 animate-fade-in-up delay-200">
-          <OnKayitForm />
+          <OnKayitForm campaigns={campaigns} initialProgram={initialProgram} />
         </div>
 
         {/* Alt link */}

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:gallery": "tsx --test tests/gallery.test.ts"
+    "test:gallery": "tsx --test tests/gallery.test.ts",
+    "test:campaigns": "tsx --test tests/campaigns.test.ts"
   },
   "dependencies": {
     "next": "16.4.2",

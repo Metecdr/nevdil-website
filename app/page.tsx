@@ -1,24 +1,8 @@
 import Link from "next/link";
 import PublicGallery from "@/components/PublicGallery";
+import { getPublicCampaigns } from "@/lib/campaign-store";
 
 export const dynamic = "force-dynamic";
-
-const onkayitlar = [
-  {
-    id: 1,
-    badge: "YAZ KURSU",
-    title: "2025 Yaz Kursu Ön Kayıt",
-    desc: "Haziran–Ağustos yaz dönemi kontenjanı dolmadan yerinizi ayırtın. Sınırlı sayıda yer!",
-    acik: true,
-  },
-  {
-    id: 2,
-    badge: "YENİ DÖNEM",
-    title: "Güz Dönemi Kayıtları",
-    desc: "Eylül başlangıçlı yeni dönem için ön kayıtlarımız açıktır. Erken kayıt avantajından yararlanın.",
-    acik: true,
-  },
-];
 
 const courses = [
   {
@@ -48,7 +32,8 @@ const stats = [
   { n: "A1–C2", l: "CEFR Sertifikası" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const campaigns = await getPublicCampaigns();
   return (
     <>
       {/* ── HERO ── */}
@@ -117,36 +102,38 @@ export default function HomePage() {
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-white mt-3">Ön Kayıt</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {onkayitlar.map((k) => (
+          {campaigns.length > 0 ? <div className={`grid grid-cols-1 gap-6 mx-auto ${campaigns.length === 1 ? "max-w-xl" : "max-w-5xl md:grid-cols-2"}`}>
+            {campaigns.map((campaign) => (
               <div
-                key={k.id}
+                key={campaign.id}
                 className="bg-gray-950 border border-yellow-400/25 rounded-2xl p-6 md:p-8 hover:border-yellow-400/60 transition-all hover:-translate-y-1 group flex flex-col"
               >
                 <div className="flex items-center gap-3 mb-5">
                   <span className="inline-block bg-yellow-400 text-black text-xs font-black px-2.5 py-1 rounded tracking-wider">
-                    {k.badge}
+                    {campaign.badge}
                   </span>
-                  {k.acik && (
-                    <span className="flex items-center gap-1.5 text-xs text-green-400 font-semibold">
-                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                      Kayıt Açık
-                    </span>
-                  )}
+                  <span className="flex items-center gap-1.5 text-xs text-green-400 font-semibold">
+                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                    Kayıt Açık
+                  </span>
                 </div>
                 <h3 className="text-white font-bold text-xl mb-3 group-hover:text-yellow-400 transition-colors">
-                  {k.title}
+                  {campaign.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{k.desc}</p>
+                <p className="text-gray-500 text-sm leading-relaxed flex-1">{campaign.description}</p>
                 <Link
-                  href="/on-kayit"
+                  href={`/on-kayit?program=${encodeURIComponent(campaign.programLabel)}`}
                   className="mt-6 block text-center bg-yellow-400 text-black font-bold py-3 rounded-full text-sm hover:bg-yellow-300 transition-all hover:scale-105"
                 >
                   Ön Kayıt Yaptır →
                 </Link>
               </div>
             ))}
-          </div>
+          </div> : <div className="mx-auto max-w-2xl rounded-2xl border border-yellow-400/15 bg-gray-950 px-6 py-10 text-center">
+            <h3 className="text-xl font-bold text-white">Yeni dönem hazırlıkları sürüyor</h3>
+            <p className="mt-3 text-sm leading-6 text-gray-500">Yeni kayıt tarihleri açıklandığında bu alanda yayınlanacaktır. Programlarımız hakkında hemen bilgi alabilirsiniz.</p>
+            <Link href="/iletisim" className="mt-6 inline-block rounded-full border border-yellow-400/30 px-6 py-3 text-sm font-bold text-yellow-400 hover:bg-yellow-400/10">Bize Ulaşın</Link>
+          </div>}
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import { filterContent } from "@/lib/profanity";
 import { sendRegistrationEmail } from "@/lib/mailer";
 import { sanitizeFormData } from "@/lib/sanitize";
 import { saveRegistration } from "@/lib/storage";
+import { isKnownProgram } from "@/lib/program-options";
 
 export type FormState = {
   success: boolean;
@@ -70,6 +71,9 @@ export async function submitOnKayit(
     }
     if (!program) {
       return { success: false, message: "Lütfen bir program seçin." };
+    }
+    if (!(await isKnownProgram(program))) {
+      return { success: false, message: "Seçtiğiniz program artık kullanılamıyor. Lütfen listeden tekrar seçim yapın." };
     }
     if (!email || !email.includes("@")) {
       return { success: false, message: "Lütfen geçerli bir e-posta adresi girin." };

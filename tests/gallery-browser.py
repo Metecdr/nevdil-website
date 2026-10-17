@@ -19,6 +19,8 @@ with sync_playwright() as p:
     for method in ["GET", "POST", "PATCH"]:
         result = anonymous.request.fetch(BASE + "/api/owner/gallery", method=method)
         assert result.status == 401, (method, result.status)
+        result = anonymous.request.fetch(BASE + "/api/owner/campaigns", method=method)
+        assert result.status == 401, (method, result.status)
     result = anonymous.request.get(BASE + "/api/owner/gallery", headers={"x-middleware-subrequest": "proxy:proxy:proxy:proxy:proxy"})
     assert result.status == 401
     page = anonymous.new_page()
@@ -31,15 +33,51 @@ with sync_playwright() as p:
     page.get_by_label("Şifre", exact=True).fill(os.environ["ADMIN_PASSWORD"])
     page.get_by_role("button", name="Giriş Yap", exact=True).click()
     expect(page).to_have_url(BASE + "/nvd-panel", timeout=20000)
+    cookies = anonymous.cookies()
+    session = next(c for c in cookies if c["name"] == "nevdil_admin")
+    auth = {"Cookie": f"nevdil_admin={session['value']}"}
+    assert session["httpOnly"] and session["secure"] and session["sameSite"] == "Strict"
+
+    page.get_by_role("link", name="Kayıt dönemleri", exact=True).click()
+    expect(page.get_by_role("heading", name="Kayıt dönemleri", exact=True)).to_be_visible()
+    add_campaign = page.locator("aside")
+    add_campaign.get_by_label("Kısa etiket", exact=True).fill("KIŞ DÖNEMİ")
+    add_campaign.get_by_label("Kart başlığı", exact=True).fill("Kış Dönemi Ön Kayıt")
+    add_campaign.get_by_label("Kısa açıklama", exact=True).fill("Kış dönemi için sınırlı kontenjanla kayıtlarımız açıldı.")
+    add_campaign.get_by_label("Formdaki seçenek adı", exact=True).fill("Kış Dönemi Kaydı")
+    add_campaign.get_by_role("button", name="Dönemi ekle", exact=True).click()
+    expect(page.get_by_role("status")).to_contain_text("Yeni kayıt dönemi eklendi")
+    campaign_card = page.locator('input[name="title"]').last.locator("xpath=ancestor::article")
+    expect(campaign_card.get_by_label("Kart başlığı", exact=True)).to_have_value("Kış Dönemi Ön Kayıt")
+    expect(campaign_card).to_have_count(1)
+
+    campaign_public = anonymous.new_page()
+    campaign_public.goto(BASE)
+    expect(campaign_public.get_by_text("Kış Dönemi Ön Kayıt", exact=True)).to_be_visible()
+    campaign_public.goto(BASE + "/on-kayit?program=K%C4%B1%C5%9F%20D%C3%B6nemi%20Kayd%C4%B1")
+    expect(campaign_public.get_by_label("Başvurmak İstediğiniz Program")).to_have_value("Kış Dönemi Kaydı")
+
+    campaign_card.get_by_label("Kart başlığı", exact=True).fill("Kış Kursu Kayıtları")
+    campaign_card.get_by_role("button", name="Metinleri kaydet", exact=True).click()
+    expect(page.get_by_role("status")).to_contain_text("Dönem bilgileri güncellendi")
+    campaign_card = page.locator('input[name="title"]').last.locator("xpath=ancestor::article")
+    expect(campaign_card.get_by_label("Kart başlığı", exact=True)).to_have_value("Kış Kursu Kayıtları")
+    campaign_card.get_by_role("button", name="Yayından kaldır", exact=True).click()
+    expect(page.get_by_role("status")).to_contain_text("Dönem yayından kaldırıldı")
+    campaign_public.goto(BASE)
+    expect(campaign_public.get_by_text("Kış Kursu Kayıtları", exact=True)).to_have_count(0)
+    campaign_card.get_by_role("button", name="Kalıcı sil", exact=True).click()
+    expect(page.get_by_role("dialog", name="Kayıt dönemi kalıcı silinsin mi?")).to_be_visible()
+    page.get_by_role("dialog", name="Kayıt dönemi kalıcı silinsin mi?").get_by_role("button", name="Kalıcı sil", exact=True).click()
+    expect(page.get_by_role("dialog", name="Kayıt dönemi kalıcı silinsin mi?")).not_to_be_visible()
+    expect(page.get_by_role("article")).to_have_count(2)
+    campaign_public.close()
+
     page.get_by_role("link", name="Fotoğraf galerisi", exact=True).click()
     expect(page.get_by_role("heading", name="Fotoğraf galerisi")).to_be_visible()
     # Next keeps framework connections alive; wait for the actual panel content instead.
     expect(page.get_by_text("İlk kareyle başlayın")).to_be_visible()
-    cookies = anonymous.cookies()
-    session = next(c for c in cookies if c["name"] == "nevdil_admin")
-    auth = {"Cookie": f"nevdil_admin={session['value']}"}
     page.screenshot(path=str(RESULTS / "desktop-empty.png"), full_page=True)
-    assert session["httpOnly"] and session["secure"] and session["sameSite"] == "Strict"
 
     for headers in [{}, {"Origin": "https://attacker.invalid"}]:
         response = anonymous.request.patch(BASE + "/api/owner/gallery", data={"action": "delete"}, headers={**auth, **headers})
@@ -99,4 +137,4 @@ with sync_playwright() as p:
     expect(page).to_have_url(BASE + "/nvd-panel/giris")
     assert anonymous.request.get(BASE + "/api/owner/gallery").status == 401
     browser.close()
-print(json.dumps({"result": "passed", "checks": "login, authorization, CSRF, upload, reorder, caption, public gallery, mobile, delete, logout", "screenshots": str(RESULTS)}, ensure_ascii=False))
+print(json.dumps({"result": "passed", "checks": "login, authorization, campaign CRUD and publishing, CSRF, upload, reorder, caption, public gallery, mobile, delete, logout", "screenshots": str(RESULTS)}, ensure_ascii=False))

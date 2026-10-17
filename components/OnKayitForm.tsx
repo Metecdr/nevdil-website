@@ -3,8 +3,9 @@
 import { useActionState } from "react";
 import { submitOnKayit } from "@/app/actions";
 import Link from "next/link";
+import type { Campaign } from "@/lib/campaign-types";
 
-export default function OnKayitForm() {
+export default function OnKayitForm({ campaigns, initialProgram = "" }: { campaigns: Campaign[]; initialProgram?: string }) {
   const [state, formAction, isPending] = useActionState(submitOnKayit, null);
 
   if (state?.success) {
@@ -88,11 +89,12 @@ export default function OnKayitForm() {
 
       {/* Ad Soyad */}
       <div>
-        <label className="text-gray-400 text-sm font-medium block mb-1.5">
+        <label htmlFor="registration-name" className="text-gray-400 text-sm font-medium block mb-1.5">
           Ad Soyad <span className="text-yellow-400">*</span>
         </label>
         <input
           name="name"
+          id="registration-name"
           type="text"
           required
           autoComplete="name"
@@ -103,11 +105,12 @@ export default function OnKayitForm() {
 
       {/* Telefon */}
       <div>
-        <label className="text-gray-400 text-sm font-medium block mb-1.5">
+        <label htmlFor="registration-phone" className="text-gray-400 text-sm font-medium block mb-1.5">
           Telefon <span className="text-yellow-400">*</span>
         </label>
         <input
           name="phone"
+          id="registration-phone"
           type="tel"
           required
           autoComplete="tel"
@@ -118,19 +121,20 @@ export default function OnKayitForm() {
 
       {/* Program */}
       <div>
-        <label className="text-gray-400 text-sm font-medium block mb-1.5">
+        <label htmlFor="registration-program" className="text-gray-400 text-sm font-medium block mb-1.5">
           Başvurmak İstediğiniz Program <span className="text-yellow-400">*</span>
         </label>
         <select
           name="program"
+          id="registration-program"
           required
+          defaultValue={initialProgram}
           className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-yellow-400 transition-colors"
         >
           <option value="">Seçiniz...</option>
-          <optgroup label="Dönemsel Kayıt">
-            <option value="Yaz Kursu (Haziran–Ağustos)">Yaz Kursu (Haziran–Ağustos)</option>
-            <option value="Güz Dönemi Kaydı">Güz Dönemi Kaydı</option>
-          </optgroup>
+          {campaigns.length > 0 && <optgroup label="Dönemsel Kayıt">
+            {campaigns.map((campaign) => <option key={campaign.id} value={campaign.programLabel}>{campaign.programLabel}</option>)}
+          </optgroup>}
           <optgroup label="Yetişkin & Sınav Hazırlık">
             <option value="YDS Hazırlık Grubu">YDS Hazırlık Grubu</option>
             <option value="İş İngilizcesi">İş İngilizcesi</option>
@@ -147,11 +151,12 @@ export default function OnKayitForm() {
 
       {/* Yaş / Sınıf */}
       <div>
-        <label className="text-gray-400 text-sm font-medium block mb-1.5">
+        <label htmlFor="registration-age" className="text-gray-400 text-sm font-medium block mb-1.5">
           Yaş / Sınıf Seviyesi
         </label>
         <select
           name="ageGroup"
+          id="registration-age"
           className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-yellow-400 transition-colors"
         >
           <option value="">Seçiniz...</option>
@@ -165,11 +170,12 @@ export default function OnKayitForm() {
 
       {/* E-posta */}
       <div>
-        <label className="text-gray-400 text-sm font-medium block mb-1.5">
+        <label htmlFor="registration-email" className="text-gray-400 text-sm font-medium block mb-1.5">
           E-posta <span className="text-yellow-400">*</span>
         </label>
         <input
           name="email"
+          id="registration-email"
           type="email"
           required
           autoComplete="email"
@@ -180,11 +186,12 @@ export default function OnKayitForm() {
 
       {/* Mesaj */}
       <div>
-        <label className="text-gray-400 text-sm font-medium block mb-1.5">
+        <label htmlFor="registration-message" className="text-gray-400 text-sm font-medium block mb-1.5">
           Mesajınız
         </label>
         <textarea
           name="message"
+          id="registration-message"
           rows={3}
           placeholder="Eklemek istedikleriniz, sormak istedikleriniz..."
           className="w-full bg-black border border-gray-800 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-yellow-400 transition-colors resize-none"
